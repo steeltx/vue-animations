@@ -1,7 +1,8 @@
 <template>
   <button type="button" @click="flag = !flag">Toogle</button>
-  <transition name="fade">
-    <h2 v-if="flag">Hola mundo!</h2>
+  <transition name="fade" mode="out-in">
+    <h2 v-if="flag" key="main">Hola mundo!</h2>
+    <h2 v-else key="secondary">Another hello!</h2>
   </transition>
 </template>
 
@@ -21,11 +22,11 @@ export default {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: all 0.25s linear;
+  transition: all 3s linear;
 }
 
 .fade-leave-to {
-  transition: all 0.25s linear;
+  transition: all 3s linear;
   opacity: 0;
 }
 </style>
