@@ -16,6 +16,7 @@
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
+    :css="false"
   >
     <h2 v-if="flag">Hey</h2>
   </transition>
@@ -31,24 +32,35 @@ export default {
   },
   methods: {
     beforeEnter(el) {
-      console.log('beforeEnter',el);
+      console.log("beforeEnter", el);
     },
     enter(el, done) {
-      done();
-      console.log('enter',el);
+      console.log("enter", el);
+
+      const animation = el.animate([{ transform: "scale3d(0,0,0)" }, {}], {
+        duration: 1000,
+      });
+      animation.onfinish = () => {
+        done();
+      };
     },
     afterEnter(el) {
-      console.log('afterEnter',el);
+      console.log("afterEnter", el);
     },
     beforeLeave(el) {
-      console.log('beforeLeave',el);
+      console.log("beforeLeave", el);
     },
     leave(el, done) {
-      done();
-      console.log('leave',el);
+      console.log("leave", el);
+      const animation = el.animate([{}, { transform: "scale3d(0,0,0)" }], {
+        duration: 1000,
+      });
+      animation.onfinish = () => {
+        done();
+      };
     },
     afterLeave(el) {
-      console.log('afterLeave',el);
+      console.log("afterLeave", el);
     },
   },
 };
